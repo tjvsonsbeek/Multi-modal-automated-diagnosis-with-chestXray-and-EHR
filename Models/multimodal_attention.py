@@ -40,8 +40,8 @@ class Attention_Net(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
         self.resnet50 = visionmodels.resnet50(pretrained = True)
-        self.resnet50filters = nn.Linear(49, 48)
-        self.resnet50linear = nn.Linear(2048,2048)
+        self.resnet50filters = self.drop(F.relu(nn.Linear(49, 48)))
+        self.resnet50linear = self.drop(F.relu(nn.Linear(2048,2048)))
         self.drop = nn.Dropout(p=0.6)
         if not only_image and not only_text:
             self.attention_i0 = Attention(2048)
