@@ -188,7 +188,7 @@ def stratify():
     dfTotal2[['No Finding', 'Enlarged Cardiomediastinum', 'Cardiomegaly', 'Lung Opacity',
                  'Lung Lesion', 'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis','Pneumothorax',
                  'Pleural Effusion', 'Pleural Other','Fracture', 'Support Devices']] = y_test
-    with open("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/test_multi_v3.csv", mode='w', newline='\n') as f:
+    with open("physionet.org/files/mimic-cxr-jpg/2.0.0/test_multi_v3.csv", mode='w', newline='\n') as f:
         dfTotal2.to_csv(f, sep=",", float_format='%.2f', index=False, line_terminator='\n',
                     encoding='utf-8')
 def stratify_val():
