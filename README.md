@@ -1,4 +1,4 @@
-# Automated diagnosis With multi-modal Learning Using Electronic Health Records and ChestX-rays
+# Towards Automated Diagnosis with Attentive Multi-Modal Learning Using Electronic Health Records and Chest X-rays
 
 ## Abstract
 
