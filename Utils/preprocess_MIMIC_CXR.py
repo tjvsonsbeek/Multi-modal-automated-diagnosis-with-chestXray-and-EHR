@@ -75,8 +75,8 @@ def extract_txt_file(path):
 
 def mergeMIMIC():
 
-    result = pd.read_csv('/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/mimic-cxr-2.0.0-chexpert.csv')
-    df = pd.read_csv('/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/mimic-cxr-2.0.0-metadata.csv')
+    result = pd.read_csv('physionet.org/files/mimic-cxr-jpg/2.0.0/mimic-cxr-2.0.0-chexpert.csv')
+    df = pd.read_csv('physionet.org/files/mimic-cxr-jpg/2.0.0/mimic-cxr-2.0.0-metadata.csv')
     df = df.loc[(df['ViewPosition'] == 'PA') | (df['ViewPosition'] == 'AP')]
     new_result = pd.DataFrame(columns=np.append(result.columns.values, np.array(['Path', 'Path_compr', 'Indication', 'Impression', 'Findings'])), index=range(df["dicom_id"].values.shape[0]))
     print(new_result)
@@ -84,13 +84,13 @@ def mergeMIMIC():
     empty = 0
     c_nf = 0
     for i in tqdm(range(paths.shape[0])):
-        p_compr = '/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/compressed_images224/files/' + 'p{}/p{}/s{}/'.format(
+        p_compr = 'physionet.org/files/mimic-cxr-jpg/compressed_images224/files/' + 'p{}/p{}/s{}/'.format(
             str(df['subject_id'].values[i])[:2], df['subject_id'].values[i], df['study_id'].values[i]) + paths[
                      i] + '.jpg'
-        p_txt = '/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr/2.0.0/files/' + 'p{}/p{}/s{}.txt'.format(
+        p_txt = 'physionet.org/files/mimic-cxr/2.0.0/files/' + 'p{}/p{}/s{}.txt'.format(
             str(df['subject_id'].values[i])[:2], df['subject_id'].values[i], df['study_id'].values[i])
 
-        p = '/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/files/'+'p{}/p{}/s{}/'.format(str(df['subject_id'].values[i])[:2], df['subject_id'].values[i],df['study_id'].values[i])+paths[i]+'.jpg'
+        p = 'physionet.org/files/mimic-cxr-jpg/2.0.0/files/'+'p{}/p{}/s{}/'.format(str(df['subject_id'].values[i])[:2], df['subject_id'].values[i],df['study_id'].values[i])+paths[i]+'.jpg'
 
         result_index = result.index[(result['subject_id'] == df['subject_id'].values[i]) & (result['study_id'] == df['study_id'].values[i])]
         impression, indication, findings = extract_txt_file(p_txt)
@@ -117,11 +117,11 @@ def mergeMIMIC():
             print("empty: {}".format(empty))
 
     print(c_nf)
-    new_result.to_csv("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/total_multi_mimic_0706_textgen.csv")
+    new_result.to_csv("physionet.org/files/mimic-cxr-jpg/2.0.0/total_multi_mimic_0706_textgen.csv")
 
 
 def stratify():
-    df = pd.read_csv("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/improved_multi_mimic_0709_text_gen.csv", usecols=['Path_compr','Indication', 'Impression', 'Findings', 'No Finding', 'Enlarged '
+    df = pd.read_csv("physionet.org/files/mimic-cxr-jpg/2.0.0/improved_multi_mimic_0709_text_gen.csv", usecols=['Path_compr','Indication', 'Impression', 'Findings', 'No Finding', 'Enlarged '
                                                                              'Cardiomediastinum',
                                            'Cardiomegaly', 'Lung Opacity','Lung Lesion',
                                            'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis',
@@ -173,7 +173,7 @@ def stratify():
                  'Lung Lesion', 'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis','Pneumothorax',
                  'Pleural Effusion', 'Pleural Other','Fracture', 'Support Devices']] = y_train
 
-    with open("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/train_multi2_v3.csv", mode='w', newline='\n') as f:
+    with open("physionet.org/files/mimic-cxr-jpg/2.0.0/train_multi2_v3.csv", mode='w', newline='\n') as f:
         dfTotal2.to_csv(f, sep=",", float_format='%.2f', index=False, line_terminator='\n',
                     encoding='utf-8')
 
@@ -192,7 +192,7 @@ def stratify():
         dfTotal2.to_csv(f, sep=",", float_format='%.2f', index=False, line_terminator='\n',
                     encoding='utf-8')
 def stratify_val():
-    df = pd.read_csv("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/train_multi2_v3.csv", usecols=['Path_compr', 'Indication', 'Impression', 'Findings', 'No Finding', 'Enlarged '
+    df = pd.read_csv("physionet.org/files/mimic-cxr-jpg/2.0.0/train_multi2_v3.csv", usecols=['Path_compr', 'Indication', 'Impression', 'Findings', 'No Finding', 'Enlarged '
                                                                                                              'Cardiomediastinum',
                                                                              'Cardiomegaly', 'Lung Opacity',
                                                                              'Lung Lesion',
@@ -247,7 +247,7 @@ def stratify_val():
               'Lung Lesion', 'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis', 'Pneumothorax',
               'Pleural Effusion', 'Pleural Other', 'Fracture', 'Support Devices']] = y_train
 
-    with open("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/train_multi_v3.csv", mode='w', newline='\n') as f:
+    with open("physionet.org/files/mimic-cxr-jpg/2.0.0/train_multi_v3.csv", mode='w', newline='\n') as f:
         dfTotal2.to_csv(f, sep=",", float_format='%.2f', index=False, line_terminator='\n',
                         encoding='utf-8')
 
@@ -262,7 +262,7 @@ def stratify_val():
     dfTotal2[['No Finding', 'Enlarged Cardiomediastinum', 'Cardiomegaly', 'Lung Opacity',
               'Lung Lesion', 'Edema', 'Consolidation', 'Pneumonia', 'Atelectasis', 'Pneumothorax',
               'Pleural Effusion', 'Pleural Other', 'Fracture', 'Support Devices']] = y_test
-    with open("/media/tjvsonsbeek/Data1/physionet.org/files/mimic-cxr-jpg/2.0.0/val_multi_v3.csv", mode='w', newline='\n') as f:
+    with open("physionet.org/files/mimic-cxr-jpg/2.0.0/val_multi_v3.csv", mode='w', newline='\n') as f:
         dfTotal2.to_csv(f, sep=",", float_format='%.2f', index=False, line_terminator='\n',
                         encoding='utf-8')
 if __name__ == '__main__':
