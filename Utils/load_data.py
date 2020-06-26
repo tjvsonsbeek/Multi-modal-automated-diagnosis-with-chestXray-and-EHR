@@ -13,7 +13,7 @@ def get_multimodal_data(TRAIN, VAL, TEST, IMG, NF, LA):
                           encoding='utf-8', engine='c', dtype={'Report': str})
 
     print("Load tokenizer")
-    with open('/home/tjvsonsbeek/Documents/physionet.org/files/mimiciii/1.4/tokenizer_reduced.pickle', 'rb') as handle:
+    with open('tokenizer_reduced.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
 
     print("Preparing train data")
@@ -89,11 +89,11 @@ def get_multimodal_data(TRAIN, VAL, TEST, IMG, NF, LA):
     return x1_train, x2_train, y1_train, y3_train, x1_val, x2_val, y1_val, y3_val, x1_test, x2_test, y1_test, y3_test
 def getTokenEmbed():
     print("Load tokenizer")
-    with open('/home/tjvsonsbeek/Documents/physionet.org/files/mimiciii/1.4/tokenizer_reduced.pickle', 'rb') as handle:
+    with open('tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
 
     print("Load embedding_matrix")
-    with open('/home/tjvsonsbeek/Documents/physionet.org/files/mimiciii/1.4/embedding_matrix_reduced.pickle', 'rb') as f:
+    with open('embedding_matrix.pickle', 'rb') as f:
         embedding_matrix = pickle.load(f)
 
     voc_size = len(tokenizer.word_index) + 1
